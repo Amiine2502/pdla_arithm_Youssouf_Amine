@@ -41,14 +41,13 @@ class Parser:
             case "neg":
                 return -self._eval(tree.children[0], variables)
             case "power":
-                return self._eval(tree.children[0], variables) ** self._eval(tree.children[1], variables)
+                return self._eval(tree.children[0], variables) ** self._eval(
+                    tree.children[1], variables
+                )
             case _:
                 raise ValueError(f"Unexpected tree data: {tree.data}")
 
-    def parse(
-    self,
-    expression: str,
-    *,
-    variables: Mapping[str, float] = {}
-    ) -> float:
-        return self._eval(self.parser.parse(expression), {**self._variables, **variables})
+    def parse(self, expression: str, *, variables: Mapping[str, float] = {}) -> float:
+        return self._eval(
+            self.parser.parse(expression), {**self._variables, **variables}
+        )
